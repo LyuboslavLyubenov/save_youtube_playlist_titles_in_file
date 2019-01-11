@@ -31,7 +31,7 @@ def run(args):
 
 
 def main():
-    parser = argparse.ArgumentParser(description='Saves titles from playlist in youtube in videos.txt')
+    parser = argparse.ArgumentParser(description='Saves titles from playlist in youtube in file (default videos.txt in same directory as this python script)')
     parser.add_argument('-username', help='youtube email', dest='username', type=str)
     parser.add_argument('-password', help='youtube password', dest='password', type=str)
     parser.add_argument('-playlist', help='playlist you want to scrape', dest='playlist', type=str, required=True)
@@ -41,3 +41,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+o
