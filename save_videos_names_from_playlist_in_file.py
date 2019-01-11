@@ -11,7 +11,8 @@ def run(args):
 
     ydl = youtube_dl.YoutubeDL({
         'username': username,
-        'password': password
+        'password': password,
+        'ignoreerrors': True
     })
 
     with open(output_path, 'w') as file:
@@ -22,12 +23,13 @@ def run(args):
                 if not video:
                     continue
 
-                try:
-                    title = video.get('title')
-                    file.write(title + '\n')
-                    file.flush()
-                except:
-                     print('error trying to get title of ' + video)
+                title = video.get('title')
+
+                if not title or len(title) == 0:
+                    continue
+
+                file.write(title + '\n')
+                file.flush()
 
 
 def main():
