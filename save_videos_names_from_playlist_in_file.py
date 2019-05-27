@@ -1,4 +1,5 @@
 #! /usr/bin/env python
+import io
 import argparse
 import youtube_dl
 
@@ -15,7 +16,7 @@ def run(args):
         'ignoreerrors': True
     })
 
-    with open(output_path, 'w') as file:
+    with io.open(output_path, 'w', encoding='utf8') as file:
         with ydl:
             playlist_videos = ydl.extract_info(playlist, download=False)
 
@@ -27,11 +28,12 @@ def run(args):
 
                 if not title or len(title) == 0:
                     continue
-
-                file.write(title + '\n')
-                file.flush()
-
-
+                
+                try:
+                    file.write(title + '\n')
+                    file.flush()
+                except:
+                    print('Cant write ' + title + ' to file') 
 def main():
     parser = argparse.ArgumentParser(description='Saves titles from playlist in youtube in file (default videos.txt in same directory as this python script)')
     parser.add_argument('-username', help='youtube email', dest='username', type=str)
@@ -43,4 +45,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-o
